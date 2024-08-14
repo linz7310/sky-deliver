@@ -2,6 +2,7 @@ package com.sky.mapper;
 
 import com.github.pagehelper.Page;
 import com.sky.annotation.AutoFill;
+import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.enumeration.OperationType;
@@ -9,6 +10,8 @@ import com.sky.vo.DishVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 /**
  * ClassName: DishMapper
@@ -57,4 +60,18 @@ public interface DishMapper {
      */
     @Delete("delete from sky_take_out.dish where id = #{id}")
     void deleteById(Long id);
+
+    /**
+     * 批量删除
+     * @param ids
+     */
+    void deleteByIds(List<Long> ids);
+
+
+    @AutoFill(value = OperationType.UPDATE)
+    void update(Dish dish);
+
+    List<Dish> list(Dish dish);
+    @Select("select a.* from dish a left join setmeal_dish b on a.id = b.dish_id where b.setmeal_id = #{setmealId}")
+    List<Dish> getBySetmealId(Long id);
 }
