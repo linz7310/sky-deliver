@@ -29,9 +29,9 @@ import java.util.Map;
 @Slf4j
 public class UserServiceImpl implements UserService {
     @Autowired
-    WeChatProperties weChatProperties;
+   private WeChatProperties weChatProperties;
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
     //微信服务接口地址
     public static final String WX_LOGIN = "http://api.weixin.qq.com/sns/jscode2session";
 
