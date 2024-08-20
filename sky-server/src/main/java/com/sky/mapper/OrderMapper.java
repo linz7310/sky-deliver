@@ -1,6 +1,6 @@
 package com.sky.mapper;
 
-import com.sky.entity.User;
+import com.sky.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -8,26 +8,31 @@ import org.apache.ibatis.annotations.Update;
 import java.time.LocalDateTime;
 
 /**
- * ClassName: UserMapper
+ * ClassName: OrderMapper
  * Package: com.sky.mapper
  * Description
  * Authot: Lin
- * Creat: 2024/8/14-19:08
+ * Creat: 2024/8/19-12:56
  */
 @Mapper
-public interface UserMapper {
+public interface OrderMapper {
+    void insert(Orders orders);
+
     /**
-     * 根据openid查找
-     * @param openid
-     * @return
+     * 根据订单号和用户id查询订单
+     * @param orderNumber
+     * @param userId
      */
-    @Select("select * from sky_take_out.user where openid = #{openid}")
-    User getByOpenid(String openid);
 
-    void insert(User user);
+    @Select("select * from orders where number = #{orderNumber}")
+    Orders getByNumber(String orderNumber);
 
-    @Select("select * from user where id=#{id}")
-    User getById(Long userId);
+
+    /**
+     * 修改订单信息
+     * @param orders
+     */
+    void update(Orders orders);
 
     @Update("update orders set status = #{orderStatus},pay_status = #{orderPaidStatus} ,checkout_time = #{check_out_time} where id = #{id}")
     void updateStatus(Integer orderStatus, Integer orderPaidStatus, LocalDateTime check_out_time, Long id);

@@ -62,7 +62,7 @@ public class SetmealController {
     @CacheEvict(cacheNames = "setmealCache",allEntries = true)
     public Result delete(@RequestParam List<Long> ids){
         setmealService.deleteBatch(ids);
-        return Result.success();
+         return Result.success();
     }
 
     @GetMapping("/{id}")

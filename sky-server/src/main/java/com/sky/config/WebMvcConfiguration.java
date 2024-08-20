@@ -46,8 +46,10 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addInterceptor(jwtTokenAdminInterceptor)
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/employee/login");
+
+
         registry.addInterceptor(jwtTokenUserInterceptor)
-                .addPathPatterns("user/**")
+                .addPathPatterns("/user/**")
                 .excludePathPatterns("/user/user/login")
                 .excludePathPatterns("/user/shop/status");
     }
@@ -63,6 +65,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 .version("2.0")
                 .description("苍穹外卖项目接口文档")
                 .build();
+
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo)
                 .select()
@@ -79,6 +82,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 .version("2.0")
                 .description("苍穹外卖项目接口文档")
                 .build();
+
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .groupName("用户端接口")
                 .apiInfo(apiInfo)
@@ -86,6 +90,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
                 .apis(RequestHandlerSelectors.basePackage("com.sky.controller.user"))
                 .paths(PathSelectors.any())
                 .build();
+
         return docket;
 
     }
